@@ -73,32 +73,37 @@ namespace ORB_SLAM3
     const int EDGE_THRESHOLD = 19;
 
 
+
     static float IC_Angle(const Mat& image, Point2f pt,  const vector<int> & u_max)
     {
         int m_01 = 0, m_10 = 0;
 
         const uchar* center = &image.at<uchar> (cvRound(pt.y), cvRound(pt.x));
+        int step = (int)image.step1();
 
-        // Treat the center line differently, v=0
+        // Treat the center line differently, v=0 && u=0
         for (int u = -HALF_PATCH_SIZE; u <= HALF_PATCH_SIZE; ++u)
             m_10 += u * center[u];
+        for (int v = -HALF_PATCH_SIZE; v <= HALF_PATCH_SIZE; ++v)
+            m_01 += v * center[v * step];
 
-        // Go line by line in the circuI853lar patch
-        int step = (int)image.step1();
+        // Go line by line in the circular patch
         for (int v = 1; v <= HALF_PATCH_SIZE; ++v)
         {
-            // Proceed over the two lines
+            // Proceed over four symmetrical points
             int v_sum = 0;
             int d = u_max[v];
-            for (int u = -d; u <= d; ++u)
+            for (int u = 1; u <= d; ++u)
             {
-                int val_plus = center[u + v*step], val_minus = center[u - v*step];
-                v_sum += (val_plus - val_minus);
-                m_10 += u * (val_plus + val_minus);
+                int lu = center[-u - v * step];
+                int ld = center[-u + v * step];
+                int ru = center[u - v * step];
+                int rd = center[u + v * step];
+                m_10 += u * (ru + rd - lu - ld);
+                v_sum += ld + rd - lu - ru;
             }
             m_01 += v * v_sum;
         }
-
         return fastAtan2((float)m_01, (float)m_10);
     }
 
