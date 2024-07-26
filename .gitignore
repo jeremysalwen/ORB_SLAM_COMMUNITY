@@ -87,6 +87,8 @@ Table_TUMVI_rooms/
 *.osa
 .idea/
 my_settings.txt
+ORBvoc.bin
+settings.json
 
 borrar/*
 
