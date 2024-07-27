@@ -29,6 +29,7 @@ jobs:
         sudo apt install -y $(cat apt-dependencies.txt)
         
     - name: Install Pangolin
+      run: |
         wget https://github.com/stevenlovegrove/Pangolin/archive/refs/tags/v0.9.1.tar.gz -O ../libpangolin.tar.gz
         tar xvf ../libpangolin.tar.gz -C ../
         cd ../Pangolin-0.9.1
