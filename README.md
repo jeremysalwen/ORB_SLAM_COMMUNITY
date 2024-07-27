@@ -1,4 +1,5 @@
 # ORB-SLAM-COMMUNITY
+[![Build ORB_SLAM](https://github.com/jeremysalwen/ORB_SLAM_COMMUNITY/actions/workflows/cmake-multi-platform.yml/badge.svg)](https://github.com/jeremysalwen/ORB_SLAM_COMMUNITY/actions/workflows/cmake-multi-platform.yml)
 
 This is a community maintained fork of https://github.com/UZ-SLAMLab/ORB_SLAM3.  The official repository has been inactive for over two years, and has accumulated 26 unresolved pull requests and nearly 500 unresolved issues.  Additionally there are numerous bugfixes and improvements scattered throughout the 2.5k+ forks on GitHub.  This fork is an attempt to create a *community consensus* version of ORB_SLAM3 that incorporates all of the best pieces that the community has created.
 
