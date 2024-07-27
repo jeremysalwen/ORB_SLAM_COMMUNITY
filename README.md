@@ -5,7 +5,8 @@ This is a community maintained fork of https://github.com/UZ-SLAMLab/ORB_SLAM3. 
 
 We welcome pull requests, and we welcome requests for commit access.
 
-
+<details>
+  <summary>Original ORB_SLAM3 readme (Click me)</summary>
 # ORB-SLAM3
 
 ### V1.0, December 22th, 2021
@@ -241,3 +242,4 @@ A flag in `include\Config.h` activates time measurements. It is necessary to unc
 
 # 9. Calibration
 You can find a tutorial for visual-inertial calibration and a detailed description of the contents of valid configuration files at  `Calibration_Tutorial.pdf`
+<details>
