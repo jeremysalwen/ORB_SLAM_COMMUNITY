@@ -23,35 +23,18 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Cache apt packages
-      uses: actions/cache@v3
-      with:
-        path: /var/cache/apt
-        key: ${{ runner.os }}-apt-${{ hashFiles('apt-dependencies.txt') }}
-        restore-keys: |
-          ${{ runner.os }}-apt-
-
-    - name: Cache Pangolin
-      uses: actions/cache@v3
-      with:
-        path: ../Pangolin-0.9.1
-        key: ${{ runner.os }}-pangolin-0.9.1
-        restore-keys: |
-          ${{ runner.os }}-pangolin-
-
-    - name: Install dependencies
+    - name: Install Apt Dependencies
       run: |
         sudo apt update
         sudo apt install -y $(cat apt-dependencies.txt)
-        if [ ! -d "../Pangolin-0.9.1" ]; then
-          wget https://github.com/stevenlovegrove/Pangolin/archive/refs/tags/v0.9.1.tar.gz -O ../libpangolin.tar.gz
-          tar xvf ../libpangolin.tar.gz -C ../
-          cd ../Pangolin-0.9.1
-          ./scripts/install_prerequisites.sh required
-          cmake -B build -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }} -DCMAKE_C_COMPILER=${{ matrix.c_compiler }} -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
-          cmake --build build --config ${{ matrix.build_type }}
-          cd -
-        fi
+        
+    - name: Install Pangolin
+        wget https://github.com/stevenlovegrove/Pangolin/archive/refs/tags/v0.9.1.tar.gz -O ../libpangolin.tar.gz
+        tar xvf ../libpangolin.tar.gz -C ../
+        cd ../Pangolin-0.9.1
+        ./scripts/install_prerequisites.sh required
+        cmake -B build -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }} -DCMAKE_C_COMPILER=${{ matrix.c_compiler }} -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+        cmake --build build --config ${{ matrix.build_type }}
 
     - name: Set reusable strings
       id: strings
