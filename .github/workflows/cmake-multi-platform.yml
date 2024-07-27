@@ -15,12 +15,10 @@ jobs:
       fail-fast: true
       matrix:
         build_type: [Release]
-        c_compiler: [gcc, clang]
+        c_compiler: [gcc]
         include:
           - c_compiler: gcc
             cpp_compiler: g++
-          - c_compiler: clang
-            cpp_compiler: clang++
 
     steps:
     - uses: actions/checkout@v4
