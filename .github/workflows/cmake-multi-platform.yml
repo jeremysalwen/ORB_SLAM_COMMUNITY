@@ -34,7 +34,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-         sudo apt install libeigen-dev
+         sudo apt install libeigen3-dev libopencv-dev
 
     - name: Set reusable strings
       # Turn repeated input strings (such as the build output directory) into step outputs. These step outputs can be used throughout the workflow file.
