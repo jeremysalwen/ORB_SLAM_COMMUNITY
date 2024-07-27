@@ -44,6 +44,39 @@ jobs:
       run: |
         echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
 
-    - name: Build Script
+    - name: Build DBoW2
       run: |
-        ./build.sh
+        echo "Configuring and building Thirdparty/DBoW2 ..."
+        cd Thirdparty/DBoW2
+        mkdir build
+        cd build
+        cmake .. -DCMAKE_BUILD_TYPE=Release
+        make -j$(nproc)
+        
+    - name: Build g2o
+      run: |
+        cd ../../g2o
+        echo "Configuring and building Thirdparty/g2o ..."
+        mkdir build
+        cd build
+        cmake .. -DCMAKE_BUILD_TYPE=Release
+        make -j$(nproc)
+        
+    - name: Build sophus
+      run: |
+        cd ../../Sophus
+        echo "Configuring and building Thirdparty/Sophus ..."
+        mkdir build
+        cd build
+        cmake .. -DCMAKE_BUILD_TYPE=Release
+        make -j$(nproc)
+        cd ../../../
+
+    - name: Build ORB_SLAM
+      run: |
+        echo "Configuring and building ORB_SLAM3 ..."
+        mkdir build
+        cd build
+        cmake .. -DCMAKE_BUILD_TYPE=Release
+        make -j$(nproc)
+        cd ..
